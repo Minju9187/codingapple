@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="scroll.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">JSShop</span>
+        <span id="darkmode" class="badge bg-dark">Dark 🔄</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <div style="height: 500px"></div>
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium esse
+      magni nobis nostrum consequatur ipsam facilis est laboriosam dolor, sed
+      libero vero officia magnam, dignissimos officiis sapiente eaque eum rerum!
+      Distinctio, tenetur architecto earum nemo exercitationem sunt eveniet!
+      Vero ad accusantium molestias fugiat pariatur libero commodi praesentium
+      et eligendi deserunt, aperiam recusandae, accusamus aspernatur eaque enim
+      iste ex omnis doloremque. Sequi itaque dolor, esse ullam odit nostrum,
+      quisquam, perferendis magnam libero amet nihil dolores quasi? Assumenda
+      nisi qui necessitatibus tenetur hic aperiam aliquam, ipsam ut esse iusto
+      nulla accusamus laudantium?
+    </div>
+    <div style="height: 1000px"></div>
+
+    <script>
+      window.addEventListener("scroll", function () {
+        // 강제로 스크롤하기
+        // window.scrollTo(0, 400);
+        // 현재위치에서 100만큼 스크롤해주세요
+        // window.scrollBy(0, 100);
+        console.log(window.scrollY);
+      });
+
+      $(window).on("scroll", function () {
+        console.log(window.scrollY);
+        if (window.scrollY == 100) {
+          document.querySelector(".navbar-brand").style.fontSize = "16px";
+        }
+        if (window.scrollY == 0) {
+          document.querySelector(".navbar-brand").style.fontSize = "30px";
+        }
+      });
+
+      $(".lorem").on("scroll", function () {
+        var 스크롤양 = document.querySelector(".lorem").scrollTop;
+        var 실제높이 = document.querySelector(".lorem").scrollHeight;
+        if (스크롤양 + 100 == 실제높이) alert("끝에 도달했습니다.");
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

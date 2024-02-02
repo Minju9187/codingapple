@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      function game369(n) {
+        if (n % 9 === 0) console.log("박수x2");
+        else if (n % 3 === 0) console.log("박수");
+        else console.log("통과");
+      }
+      game369(18);
+
+      function 합격여부(개론, 민법) {
+        if (개론 < 0 || 개론 > 100 || 민법 < 0 || 민법 > 100)
+          alert("제대로 입력해주세요");
+        if (개론 < 40 && 민법 < 40) console.log("불합격");
+        else {
+          if (개론 + 민법 >= 120) console.log("합격");
+          else console.log("불합격");
+        }
+      }
+
+      합격여부(120, 140);
+    </script>
+  </body>
+</html>

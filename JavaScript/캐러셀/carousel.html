@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="carousel.css" />
+  </head>
+  <body>
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="img/car1.png" />
+        </div>
+        <div class="slide-box">
+          <img src="img/car2.png" />
+        </div>
+        <div class="slide-box">
+          <img src="img/car3.png" />
+        </div>
+      </div>
+    </div>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
+    <button class="before">이전</button>
+    <script>
+      document.querySelector(".slide-1").addEventListener("click", function () {
+        document.querySelector(".slide-container").style.transform =
+          "translateX(0vw)";
+      });
+      document.querySelector(".slide-2").addEventListener("click", function () {
+        document.querySelector(".slide-container").style.transform =
+          "translateX(-100vw)";
+      });
+      document.querySelector(".slide-3").addEventListener("click", function () {
+        document.querySelector(".slide-container").style.transform =
+          "translateX(-200vw)";
+      });
+      let current = 0;
+      document.querySelector(".next").addEventListener("click", function () {
+        current++;
+        document.querySelector(
+          ".slide-container"
+        ).style.transform = `translateX(-${current % 3}00vw)`;
+      });
+      document.querySelector(".before").addEventListener("click", function () {
+        current--;
+        if (current < 0) {
+          current += 3;
+        }
+        document.querySelector(
+          ".slide-container"
+        ).style.transform = `translateX(-${current}00vw)`;
+      });
+    </script>
+  </body>
+</html>
