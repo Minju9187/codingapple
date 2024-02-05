@@ -7,3 +7,13 @@
 .navbar-brand {
   font-size: 30px;
 }
+
+.progress {
+  width: 0px;
+  height: 5px;
+  background-color: #007bff;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  z-index: 10;
+}

@@ -27,7 +27,8 @@
         </button>
       </div>
     </nav>
-    <div style="height: 500px"></div>
+    <div class="progress"></div>
+    <div style="height: 2000px"></div>
     <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium esse
       magni nobis nostrum consequatur ipsam facilis est laboriosam dolor, sed
@@ -43,17 +44,17 @@
     <div style="height: 1000px"></div>
 
     <script>
+      const totalHeight =
+        document.querySelector("html").scrollHeight -
+        document.querySelector("html").clientHeight;
       window.addEventListener("scroll", function () {
-        // 강제로 스크롤하기
-        // window.scrollTo(0, 400);
-        // 현재위치에서 100만큼 스크롤해주세요
-        // window.scrollBy(0, 100);
-        console.log(window.scrollY);
+        let scrollPercent = Math.floor((window.scrollY / totalHeight) * 100);
+        document.querySelector(".progress").style.width = scrollPercent + "%";
+        console.log(scrollPercent);
       });
 
       $(window).on("scroll", function () {
-        console.log(window.scrollY);
-        if (window.scrollY == 100) {
+        if (window.scrollY > 100) {
           document.querySelector(".navbar-brand").style.fontSize = "16px";
         }
         if (window.scrollY == 0) {
@@ -64,7 +65,7 @@
       $(".lorem").on("scroll", function () {
         var 스크롤양 = document.querySelector(".lorem").scrollTop;
         var 실제높이 = document.querySelector(".lorem").scrollHeight;
-        if (스크롤양 + 100 == 실제높이) alert("끝에 도달했습니다.");
+        if (스크롤양 + 100 > 실제높이 - 10) alert("끝에 도달했습니다.");
       });
     </script>
     <script
