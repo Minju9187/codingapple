@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form class="container my-5 form-group">
+      <p>상품선택</p>
+      <select class="form-select mt-2">
+        <option>모자</option>
+        <option>셔츠</option>
+        <option>바지</option>
+      </select>
+      <select class="form-select mt-2 form-hide">
+        <option>95</option>
+        <option>100</option>
+      </select>
+    </form>
+    <div id="test"></div>
+    <script>
+      var pants = [28, 30, 32];
+      document
+        .querySelectorAll("form")[0]
+        .addEventListener("input", function () {
+          let value = document.querySelectorAll(".form-select")[0].value;
+          if (value == "셔츠") {
+            document
+              .querySelectorAll(".form-select")[1]
+              .classList.remove("form-hide");
+            document
+              .querySelectorAll(".form-select")[1]
+              .querySelectorAll("option")[0].innerHTML = 95;
+            document
+              .querySelectorAll(".form-select")[1]
+              .querySelectorAll("option")[1].innerHTML = 100;
+          } else if (value == "모자") {
+            document
+              .querySelectorAll(".form-select")[1]
+              .classList.add("form-hide");
+          } else if (value == "바지") {
+            document
+              .querySelectorAll(".form-select")[1]
+              .classList.remove("form-hide");
+            document.querySelectorAll(".form-select")[1].innerHTML = "";
+            pants.forEach(function (a) {
+              document.querySelectorAll(
+                ".form-select"
+              )[1].innerHTML += `<option>${a}</option>`;
+            });
+            // pants.forEach((a) => {
+            //   document.querySelectorAll(
+            //     ".form-select"
+            //   )[1].innerHTML += `<option>${a}</option>`;
+            // });
+            // document
+            //   .querySelectorAll(".form-select")[1]
+            //   .querySelectorAll("option")[0].innerHTML = 28;
+            // document
+            //   .querySelectorAll(".form-select")[1]
+            //   .querySelectorAll("option")[1].innerHTML = 30;
+          }
+        });
+
+      var 템플릿 = "<p>안녕</p>";
+      document.querySelector("#test").insertAdjacentHTML("beforeend", 템플릿);
+      $("#test").append(템플릿);
+      //   document.querySelector("#test").innerHTML = 템플릿;
+
+      var obj = { name: "kim", age: 20 };
+      for (var key in obj) {
+        console.log(obj[key]);
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
