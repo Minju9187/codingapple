@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="card-background">
+      <div class="card-box">
+        <img src="img/card1.png" />
+      </div>
+      <div class="card-box">
+        <img src="img/card2.png" />
+      </div>
+      <div class="card-box">
+        <img src="img/card3.png" />
+      </div>
+    </div>
+    <script>
+      $(window).scroll(function () {
+        var height = $(window).scrollTop();
+        console.log(window.scrollY);
+        //300~900
+        var y1 = 1 - (height - 300) / 600;
+        var size1 = 1 - (height - 300) / 600 / 20;
+        $(".card-box").eq(0).css("opacity", y1);
+        $(".card-box")
+          .eq(0)
+          .css({ transform: `scale(${size1})` });
+        // 1100~1700
+        var y2 = 1 - (height - 1100) / 600;
+        var size2 = 1 - (height - 1100) / 600 / 20;
+        $(".card-box").eq(1).css("opacity", y2);
+        $(".card-box")
+          .eq(1)
+          .css({ transform: `scale(${size2})` });
+      });
+    </script>
+  </body>
+</html>

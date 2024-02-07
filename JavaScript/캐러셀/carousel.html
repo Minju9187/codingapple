@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="carousel.css" />
   </head>
   <body>
@@ -54,6 +59,36 @@
           ".slide-container"
         ).style.transform = `translateX(-${current}00vw)`;
       });
+    </script>
+    <script>
+      // mousedown : 마우스로 누를때
+      // mouseup : 마우스 뗄 때
+      // mousemove : 마우스 움직일 때
+      var 시작좌표 = 0;
+      var click = false;
+
+      $(".slide-box")
+        .eq(0)
+        .on("mousedown", function (e) {
+          시작좌표 = e.clientX;
+          click = true;
+        });
+      $(".slide-box")
+        .eq(0)
+        .on("mousemove", function (e) {
+          if (click == true) {
+            $(".slide-container").css(
+              "transform",
+              `translateX(${e.clientX - 시작좌표}px)`
+            );
+            console.log(e.clientX - 시작좌표);
+          }
+        });
+      $(".slide-box")
+        .eq(0)
+        .on("mouseup", function (e) {
+          click = false;
+        });
     </script>
   </body>
 </html>

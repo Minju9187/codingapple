@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div class="basket">장바구니 페이지</div>
+    <script>
+      let arr = JSON.parse(localStorage.getItem("cart"));
+      arr.forEach((v) => {
+        document.querySelector("body").innerHTML += `<p>${v}</p>`;
+      });
+    </script>
+  </body>
+</html>

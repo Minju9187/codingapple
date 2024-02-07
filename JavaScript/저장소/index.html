@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      localStorage.setItem("이름", "강민주");
+      localStorage.removeItem("이름");
+      //배열이 제대로 저장되지 않음
+      //   localStorage.setItem("num", [1, 2, 3]);
+      var arr = [1, 2, 3];
+      var newArr = JSON.stringify(arr);
+
+      localStorage.setItem("num", newArr);
+      var 꺼낸거 = localStorage.getItem("num");
+
+      newArr = JSON.parse(꺼낸거);
+      newArr.push(4);
+      newArr = JSON.stringify(newArr);
+      localStorage.setItem("num", newArr);
+
+      sessionStorage.setItem("num", newArr);
+    </script>
+  </body>
+</html>
