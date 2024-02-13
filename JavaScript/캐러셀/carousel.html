@@ -35,14 +35,17 @@
         document.querySelector(".slide-container").style.transform =
           "translateX(0vw)";
       });
+
       document.querySelector(".slide-2").addEventListener("click", function () {
         document.querySelector(".slide-container").style.transform =
           "translateX(-100vw)";
       });
+
       document.querySelector(".slide-3").addEventListener("click", function () {
         document.querySelector(".slide-container").style.transform =
           "translateX(-200vw)";
       });
+
       let current = 0;
       document.querySelector(".next").addEventListener("click", function () {
         current++;
@@ -50,6 +53,7 @@
           ".slide-container"
         ).style.transform = `translateX(-${current % 3}00vw)`;
       });
+
       document.querySelector(".before").addEventListener("click", function () {
         current--;
         if (current < 0) {
@@ -69,25 +73,40 @@
 
       $(".slide-box")
         .eq(0)
-        .on("mousedown", function (e) {
-          시작좌표 = e.clientX;
+        .on("touchstart", function (e) {
+          시작좌표 = e.touches[0].clientX;
           click = true;
         });
+
       $(".slide-box")
         .eq(0)
-        .on("mousemove", function (e) {
-          if (click == true) {
+        .on("touchmove", function (e) {
+          if (click === true) {
             $(".slide-container").css(
               "transform",
-              `translateX(${e.clientX - 시작좌표}px)`
+              `translateX(${e.touches[0].clientX - 시작좌표}px)`
             );
-            console.log(e.clientX - 시작좌표);
           }
         });
+
       $(".slide-box")
         .eq(0)
-        .on("mouseup", function (e) {
+        .on("touchend", function (e) {
           click = false;
+          console.log(e.clientX, 시작좌표);
+          if (e.changedTouches[0].clientX - 시작좌표 < -100) {
+            $(".slide-container")
+              .css("transition", "all 0.5s")
+              .css("transform", "translateX(-100vw)");
+          } else {
+            $(".slide-container")
+              .css("transition", "all 0.5s")
+              .css("transform", "translateX(0vw)");
+          }
+
+          setTimeout(() => {
+            $(".slide-container").css("transition", "none");
+          }, 500);
         });
     </script>
   </body>

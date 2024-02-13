@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <h1>집꾸미기</h1>
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">스토어</a></li>
+        <li><a href="">시공견적</a></li>
+      </ul>
+    </nav>
+    <main>
+      <label><input type="text" placeholder="검색어입력" /></label>
+      <ul>
+        <h2 class="a11y-hidden">쇼핑리스트</h2>
+        <li>
+          <div><img src="./img/pr1.JPG" /></div>
+          <p class="name">식기세척기</p>
+          <p class="company">세척나라</p>
+          <p class="price">가격 : 10000</p>
+          <button class="btn" type="button">담기</button>
+        </li>
+        <li>
+          <div><img src="./img/pr2.JPG" /></div>
+          <p class="name">원목 침대 프레임</p>
+          <p class="company">침대나라</p>
+          <p class="price">가격 : 20000</p>
+          <button class="btn" type="button">담기</button>
+        </li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="basket">
+        <h2>장바구니</h2>
+        <div class="drag"></div>
+      </div>
+    </main>
+    <script>
+      fetch("store.json")
+        .then((res) => res.json())
+        .then(function (data) {
+          console.log(data);
+        })
+        .catch(function (error) {
+          console.log("실패함");
+        });
+    </script>
+  </body>
+</html>
