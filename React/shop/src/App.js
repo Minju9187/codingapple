@@ -6,6 +6,9 @@ import Goods from "./components/Goods.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./Detail.js";
 import axios from "axios";
+import Cart from "./Cart.js";
+import { useQuery } from "react-query";
+
 //보관함
 export let Context1 = createContext();
 
@@ -14,6 +17,25 @@ function App() {
   let navigate = useNavigate();
   let [click, setClick] = useState(2);
   let [재고] = useState([10, 11, 12]);
+
+  let result = useQuery(
+    "작명",
+    () =>
+      axios.get("https://codingapple1.github.io/userdata.json").then((a) => {
+        console.log("hi");
+        return a.data;
+      }),
+    // refetch 시간도 설정할 수 있음
+    { staleTime: 2000 }
+  );
+  console.log(result);
+  // result.data; //요청이 성공했을때 가져오는 data
+  // result.isLoading; //로딩이 요청중일 때 true
+  // result.error; // 요청이 실패했을 때 true
+
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
 
   const addShoes = function () {
     // 로딩중UI 띄우기
@@ -50,13 +72,19 @@ function App() {
           </Nav.Link>
           <Nav.Link
             onClick={() => {
-              navigate("/detail/0");
+              navigate("/cart");
             }}
           >
-            Detail
+            Cart
           </Nav.Link>
           {/* <Link to="/">Home</Link>
           <Link to="/detail">상세페이지</Link> */}
+        </Nav>
+        <Nav className="ms-auto loading">
+          {/* {result.isLoading ? "로딩중" : result.data.name} */}
+          {result.isLoading && "로딩중"}
+          {result.error && "에러남"}
+          {result.data && result.data.name}
         </Nav>
       </Navbar>
       <Routes>
@@ -88,6 +116,7 @@ function App() {
           <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
           <Route path="two" element={<p>생일기념 쿠폰받기</p>} />
         </Route>
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </>

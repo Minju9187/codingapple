@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Nav } from "react-bootstrap";
 import { Context1 } from "./App.js";
+import { addCart } from "./store.js";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Detail({ shoes }) {
   let { id } = useParams();
@@ -14,7 +16,19 @@ export default function Detail({ shoes }) {
   let [tab, setTab] = useState(0);
   let [fade2, setFade2] = useState("");
   let { 재고 } = useContext(Context1);
-  console.log(재고);
+  let dispatch = useDispatch();
+
+  let data = useSelector((state) => {
+    return state.cart;
+  });
+
+  useEffect(() => {
+    let lastGoods = JSON.parse(localStorage.getItem("watched"));
+    if (!lastGoods.includes(id)) lastGoods.push(id);
+    localStorage.setItem("watched", JSON.stringify(lastGoods));
+  }, []);
+
+  console.log(data);
   // 마운트,업데이트시 코드 실행(useEffect)
   // 렌더링이 다 되고 나서 실행됨
   // HTML을 먼저 보여준 후 실행됨
@@ -81,7 +95,16 @@ export default function Detail({ shoes }) {
           <h4 className="pt-5">{shoeObj.title}</h4>
           <p>{shoeObj.content}</p>
           <p>{shoeObj.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(
+                addCart({ id: shoeObj.id, name: shoeObj.title, count: 1 })
+              );
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
       <label>
@@ -132,6 +155,7 @@ export default function Detail({ shoes }) {
     </div>
   );
 }
+
 function TabContent({ tab, shoes }) {
   let [fade, setFade] = useState("");
 

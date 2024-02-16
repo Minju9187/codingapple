@@ -1,9 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Goods({ data }) {
+  let navigate = useNavigate();
   return (
     <>
-      <div className="col-md-4">
+      <div
+        onClick={() => {
+          navigate(`/detail/${data.id}`);
+        }}
+        className="col-md-4"
+      >
         <img
           src={`https://codingapple1.github.io/shop/shoes${data.id + 1}.jpg`}
           width="80%"
