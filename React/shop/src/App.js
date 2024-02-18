@@ -1,13 +1,15 @@
 import { Nav, Navbar } from "react-bootstrap";
 import "./style.css";
-import { createContext, useEffect, useState } from "react";
+import { lazy, Suspense, createContext, useEffect, useState } from "react";
 import data from "./data.js";
 import Goods from "./components/Goods.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import Detail from "./Detail.js";
 import axios from "axios";
-import Cart from "./Cart.js";
 import { useQuery } from "react-query";
+// import Detail from "./Detail.js";
+// import Cart from "./Cart.js";
+const Detail = lazy(() => import("./Detail.js"));
+const Cart = lazy(() => import("./Cart.js"));
 
 //보관함
 export let Context1 = createContext();
@@ -35,6 +37,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("watched", JSON.stringify([]));
+    console.log("app");
   }, []);
 
   const addShoes = function () {
@@ -87,38 +90,40 @@ function App() {
           {result.data && result.data.name}
         </Nav>
       </Navbar>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <div className="main-bg"></div>
-              <div className="container">
-                <div className="row">
-                  {shoes.map((v, i) => {
-                    return <Goods key={i} data={v} />;
-                  })}
+      <Suspense fallback={<div>로딩중</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <div className="main-bg"></div>
+                <div className="container">
+                  <div className="row">
+                    {shoes.map((v, i) => {
+                      return <Goods key={i} data={v} />;
+                    })}
+                  </div>
                 </div>
-              </div>
-              {click <= 3 ? <button onClick={addShoes}>버튼</button> : <></>}
-            </>
-          }
-        />
-        <Route
-          path="/detail/:id"
-          element={
-            <Context1.Provider value={{ 재고 }}>
-              <Detail shoes={shoes} />
-            </Context1.Provider>
-          }
-        />
-        <Route path="/event" element={<Event />}>
-          <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
-          <Route path="two" element={<p>생일기념 쿠폰받기</p>} />
-        </Route>
-        <Route path="/cart" element={<Cart />} />
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
+                {click <= 3 ? <button onClick={addShoes}>버튼</button> : <></>}
+              </>
+            }
+          />
+          <Route
+            path="/detail/:id"
+            element={
+              <Context1.Provider value={{ 재고 }}>
+                <Detail shoes={shoes} />
+              </Context1.Provider>
+            }
+          />
+          <Route path="/event" element={<Event />}>
+            <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
+            <Route path="two" element={<p>생일기념 쿠폰받기</p>} />
+          </Route>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<div>404</div>} />
+        </Routes>
+      </Suspense>
     </>
   );
 }
