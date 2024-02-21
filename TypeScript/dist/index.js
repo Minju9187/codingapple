@@ -22,3 +22,24 @@ var 이미지 = document.querySelector("#image");
         이미지.src = "new.jpg";
     }
 });
+var Square = (function () {
+    function Square(width, height, color) {
+        this.width = width;
+        this.height = height;
+        this.color = color;
+    }
+    Square.prototype.draw = function () {
+        var a = Math.random();
+        var b = Math.random();
+        var square = "<div style=\"position:relative; \n      top:".concat(a * 400, "px; \n      left:").concat(b * 400, "px; \n      width:").concat(this.width, "px; \n      height : ").concat(this.height, "px; \n      background:").concat(this.color, "\"></div>");
+        document
+            .querySelector("#additionalContent")
+            .insertAdjacentHTML("beforeend", square);
+    };
+    return Square;
+}());
+var 네모 = new Square(30, 30, "red");
+네모.draw();
+네모.draw();
+네모.draw();
+네모.draw();
