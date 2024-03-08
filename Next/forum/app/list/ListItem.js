@@ -18,11 +18,22 @@ export default function ListItem({ result }) {
             {/* <DetailLink /> */}
             <Link href={`/edit/${v._id}`}>✏️</Link>
             <span
-              onClick={() => {
+              onClick={(e) => {
                 fetch("/api/post/delete", {
                   method: "DELETE",
                   body: v._id,
-                });
+                })
+                  .then((response) => {
+                    return response.json();
+                  })
+                  .then(() => {
+                    e.target.parentElement.style.opacity = 0;
+                    setTimeout(() => {
+                      e.target.parentElement.style.display = "none";
+                    }, 1000);
+                  });
+                // fetch("/api/test?name=kim&age=20");
+                // fetch("/api/abc/kim");
               }}
             >
               🗑️

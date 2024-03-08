@@ -4,6 +4,8 @@ import Link from "next/link";
 import DetailLink from "./DetailLink";
 import ListItem from "./ListItem";
 
+// export const dynamic = "force-dynamic";
+
 export default async function List() {
   const client = await connectDB;
   const db = client.db("forum");
