@@ -1,8 +1,12 @@
 // import Image from "next/image";
 // import Tomatoes from "/public/food0.png";
+"use client";
+
+import { useState } from "react";
 
 export default function List() {
   let 상품 = ["Tomatoes", "Pasta", "Coconut"];
+  let [num, setNum] = useState([0, 0, 0]);
   return (
     <div>
       <h4 className="title">상품목록</h4>
@@ -16,6 +20,25 @@ export default function List() {
               className="food-img"
             />
             <h4>{v} $40</h4>
+            <span>{num[i]}</span>
+            <button
+              onClick={() => {
+                let copy = [...num];
+                copy[i] = copy[i] + 1;
+                setNum(copy);
+              }}
+            >
+              +
+            </button>
+            <button
+              onClick={() => {
+                let copy = [...num];
+                copy[i] = copy[i] - 1;
+                setNum(copy);
+              }}
+            >
+              -
+            </button>
           </div>
         );
       })}
