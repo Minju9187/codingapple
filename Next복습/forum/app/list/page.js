@@ -1,5 +1,6 @@
 import { connectDB } from "@/util/database";
 import Link from "next/link";
+import ListItem from "./ListItem";
 
 export default async function List() {
   const db = (await connectDB).db("forum");
@@ -7,16 +8,7 @@ export default async function List() {
 
   return (
     <div className="list-bg">
-      {result.map((v, i) => {
-        return (
-          <div className="list-item" key={i}>
-            <Link href={`/detail/${v._id}`}>
-              <h4>{v.title}</h4>
-            </Link>
-            <p>1월 1일</p>
-          </div>
-        );
-      })}
+      <ListItem data={result} />
     </div>
   );
 }
