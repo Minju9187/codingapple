@@ -18,25 +18,30 @@ export default function ListItem({ data }) {
             ✏️
           </Link>
           <span
-            onClick={() => {
+            onClick={(e) => {
               fetch("/api/post/delete", {
                 method: "DELETE",
                 body: v._id,
               })
                 .then((r) => {
-                  if (r.status == 200) {
-                    return r.json();
-                  } else {
-                    //서버가 에러코드전송시 실행할코드
-                  }
+                  r.json();
                 })
-                .then((result) => {
-                  //성공시 실행할코드
-                })
-                .catch((error) => {
-                  //인터넷문제 등으로 실패시 실행할코드
-                  console.log(error);
+                .then(() => {
+                  e.target.parentElement.style.opacity = 0;
+                  setTimeout(() => {
+                    e.target.parentElement.style.display = "none ";
+                  }, 1000);
                 });
+              // .catch((error) => {
+              //   //인터넷문제 등으로 실패시 실행할코드
+              //   console.log(error);
+              // });
+              //query string
+              //아래처럼 fetch를 사용하면 데이터 = 값을 전송할 수 있다.
+              //서버에서 request.query를 통해 데이터를 확인할 수 있다.
+              // fetch("/api/test?name=kim&age=20")
+              //URL parameter
+              // fetch("/api/abc/kim");
             }}
           >
             🗑️
